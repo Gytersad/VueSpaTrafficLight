@@ -22,27 +22,27 @@ export default {
     }
   },
   methods: {
-    ligthCreate(path, dur, next) {
+    lightCreate(path, dur, next) {
       this.path = path
       this.dur = dur
       this.next = next
     },
+    lightTimeLeft() {
+      let timerID = setInterval(() => {this.time--}, 1000)
+      setTimeout(() => {clearInterval(timerID)}, this.time * 1000)
+    },
     lightChange(state, callback) {
       callback(state)
       this.time = state.dur
-      setInterval(() => {
-        this.time--
-      }, 1000)
-      setTimeout(() => {
-        this.lightChange(state.next, callback)
-      }, state.dur * 1000)
+      this.lightTimeLeft()
+      setTimeout(() => {this.lightChange(state.next, callback)}, state.dur * 1000)
     },
   },
   created() {
-    let red = new this.ligthCreate('/red', 10)
-    let yellowR = new this.ligthCreate('/yellow', 3)
-    let yellowG = new this.ligthCreate('/yellow', 3)
-    let green = new this.ligthCreate('/green', 15)
+    let red = new this.lightCreate('/red', 10)
+    let yellowR = new this.lightCreate('/yellow', 3)
+    let yellowG = new this.lightCreate('/yellow', 3)
+    let green = new this.lightCreate('/green', 15)
 
     red.next = yellowR
     yellowR.next = green
@@ -54,7 +54,8 @@ export default {
     else if (this.$route.path === '/green') beginState = green
 
     this.lightChange(beginState, (state) => {
-      this.$router.push({path: state.path, component: Light}).catch(()=>{});
+      this.$router.push({path: state.path, component: Light}).catch(() => {
+      });
     })
   }
 }
