@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import light from '@/components/light'
+import Light from '@/components/Light'
 
 Vue.use(Router)
 export default new Router({
@@ -8,15 +8,15 @@ export default new Router({
     routes: [
         {
             path: '/red',
-            component: light
+            component: Light
         },
         {
             path: '/yellow',
-            component: light
+            component: Light
         },
         {
             path: '/green',
-            component: light
+            component: Light
         }
     ]
 })

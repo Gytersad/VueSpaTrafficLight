@@ -7,12 +7,6 @@
 <script>
 export default {
   props: ['time'],
-  created () {
-    this.time++
-    setInterval(() => {
-      this.time--
-    }, 1000)
-  }
 }
 </script>
 

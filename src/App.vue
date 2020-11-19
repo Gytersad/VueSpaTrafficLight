@@ -1,18 +1,21 @@
 <template>
   <div class="trafficLight">
-    <light path="/red" class="red"/>
-    <light path="/yellow" class="yellow"/>
-    <light path="/green" class="green"/>
-    <timer :time="time"/>
+    <Light path="/red" class="red"/>
+    <Light path="/yellow" class="yellow"/>
+    <Light path="/green" class="green"/>
+    <Timer :time="time"/>
   </div>
 </template>
 
 <script>
-import light from './components/light'
-import timer from './components/timer'
+import Light from './components/Light'
+import Timer from './components/Timer'
 
 export default {
-  components: light, timer,
+  components: {
+    Light,
+    Timer,
+  },
   data() {
     return {
       time: 0
@@ -27,6 +30,9 @@ export default {
     lightChange(state, callback) {
       callback(state)
       this.time = state.dur
+      setInterval(() => {
+        this.time--
+      }, 1000)
       setTimeout(() => {
         this.lightChange(state.next, callback)
       }, state.dur * 1000)
@@ -48,7 +54,7 @@ export default {
     else if (this.$route.path === '/green') beginState = green
 
     this.lightChange(beginState, (state) => {
-      this.$router.push({path: state.path, component: light})
+      this.$router.push({path: state.path, component: Light}).catch(()=>{});
     })
   }
 }
