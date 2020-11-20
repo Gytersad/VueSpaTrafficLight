@@ -1,8 +1,8 @@
 <template>
   <div class="trafficLight">
-    <Light path="/red" class="red"/>
-    <Light path="/yellow" class="yellow"/>
-    <Light path="/green" class="green"/>
+    <Light path="/red" class="red" :time="time"/>
+    <Light path="/yellow" class="yellow" :time="time"/>
+    <Light path="/green" class="green" :time="time"/>
     <Timer :time="time"/>
   </div>
 </template>
@@ -72,15 +72,15 @@ export default {
 }
 
 .red {
-  background: red;
+  background-color: rgb(230, 0, 0);
 }
 
 .yellow {
-  background: yellow;
+  background-color: rgb(255, 120, 0);
 }
 
 .green {
-  background: green;
+  background-color: rgb(76, 187, 23);
 }
 
 </style>

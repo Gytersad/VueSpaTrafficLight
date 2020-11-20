@@ -7,9 +7,6 @@
 <script>
 export default {
   props: ['time'],
-  created() {
-    console.log(this.time)
-  }
 }
 </script>
 
