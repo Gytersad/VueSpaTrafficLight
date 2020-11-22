@@ -34,7 +34,7 @@ export default {
     loadInfo() {
 
       clearTimeout(this.changeID)
-      clearTimeout(this.timerID)
+      clearInterval(this.timerID)
       this.$router.push({path: localStorage.path, component: Light}).catch(() => {})
       this.time = localStorage.time
       this.lightTimeLeft()
@@ -63,7 +63,7 @@ export default {
     saveInfo(){
       localStorage.time = this.time
       localStorage.path = this.$route.path
-      console.log(`${localStorage.time}` +' '+ `${localStorage.path}`)
+
     },
     lightCreate(path, dur, next) {
       this.path = path
