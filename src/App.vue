@@ -26,14 +26,18 @@ export default {
   data() {
     return {
       time: 0,
-      path: '',
-      changeID: ''
+      changeID: '',
+      timerID: ''
     }
   },
   methods: {
     loadInfo() {
-      this.time = localStorage.time;
-      this.$router.push({path: localStorage.path, component: Light}).catch(() => {});
+
+      clearTimeout(this.changeID)
+      clearTimeout(this.timerID)
+      this.$router.push({path: localStorage.path, component: Light}).catch(() => {})
+      this.time = localStorage.time
+      this.lightTimeLeft()
 
       let red = new this.lightCreate('/red', 10)
       let yellowR = new this.lightCreate('/yellow', 3)
@@ -50,7 +54,6 @@ export default {
       if (this.$route.path === '/yellow') beginState = red
       else if (this.$route.path === '/green') beginState = yellowG
 
-      clearTimeout(this.changeID)
       let loadID = setTimeout(() =>
               this.lightChange(beginState,
                   (state) => {this.$router.push({path: state.path, component: Light}).catch(() => {});}            ),
@@ -68,8 +71,8 @@ export default {
       this.next = next
     },
     lightTimeLeft() {
-      let timerID = setInterval(() => {this.time--}, 1000)
-      setTimeout(() => {clearInterval(timerID)}, this.time * 1000)
+      this.timerID = setInterval(() => {this.time--}, 1000)
+      setTimeout(() => {clearInterval(this.timerID)}, this.time * 1000)
     },
     lightChange(state, callback) {
         callback(state)

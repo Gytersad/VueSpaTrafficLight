@@ -10,6 +10,3 @@ name: "BtnLoad"
 }
 </script>
 
-<style scoped>
-
-</style>
